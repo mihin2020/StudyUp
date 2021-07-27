@@ -13,6 +13,6 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/admin', 'DashboardController@dashboard')->name('dashboard')->middleware("auth");
+Route::get('/admin', 'DashboardController@dashboard')->name('dashboard');//->middleware("auth");
 Route::get('/home', 'HomeController@index')->name('home');
 require(__DIR__.'../../app/Http/Controllers/Auth/auth.php');
