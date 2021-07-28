@@ -14,7 +14,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categories::all();
+        return view('categories.categories', compact('categories'));
     }
 
     /**
@@ -35,7 +36,16 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'categorie' => 'required|string|',
+            'icone' => 'required|image|',
+        ]);
+        $image = request('icone')->store('uploads', 'public');
+        Categories::create([
+            'categorie' => request('categorie'),
+            'icone' => $image
+        ]);
+        return redirect()->intended('categories')->with('success', 'La catégorie a été ajouté avec succes');
     }
 
     /**
@@ -55,22 +65,32 @@ class CategoriesController extends Controller
      * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categories $categories)
+    public function edit($id)
     {
-        //
+        $categories = Categories::find($id);
+        return view('categories.edit', compact('categories'));
     }
 
-    /**
+    /** 
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'categorie' => 'required|string|',
+            'icone' => '|image|',
+        ]);
+        $categories = Categories::find($id);
+        $categories->categorie =  $request->get('categorie');
+        $categories->save();
+
+        return redirect()->intended('categories')->with('success', 'La modification a été effectué avec succes');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +98,10 @@ class CategoriesController extends Controller
      * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categories $categories)
+    public function destroy($categories)
     {
-        //
+        $categories = Categories::find($categories);
+        $categories->delete();
+        return redirect('categories')->with('success', 'La suppression a été effectué avec succes');;
     }
 }
