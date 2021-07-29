@@ -12,17 +12,18 @@
     </div>
     <div class="container">
         <section class="content">
-            <form method="post" action="{{ route('categories.update',$categories->id) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('authors.update',$auteurs->id) }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="form-group">
                     <label>Nom:</label>
-                    <input type="text" value="{{ $categories->categorie }}" name="categorie" class="form-control">
-                    <input type="hidden" name="categorieId" value="{{ $categories->id }}">
-                    {!! $errors->first('categorie', '<small class="text-danger">:message</small>') !!}
+                    <input type="text" value="{{ $auteurs->nom }}" name="nom" class="form-control">
+                    {!! $errors->first('nom', '<small class="text-danger">:message</small>') !!}
                 </div>
                 <div class="form-group">
-                    <input type="file" value="{{ $categories->icone }}" class="form-control-file" name="icone" id="exampleFormControlFile1">
+                    <label>Prenom(s):</label>
+                    <input type="text" value="{{ $auteurs->prenom }}" name="prenom" class="form-control">
+                    {!! $errors->first('prenom', '<small class="text-danger">:message</small>') !!}
                 </div>
                 <button type="submit" class="btn btn-primary">Modifier</button>
             </form>
