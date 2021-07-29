@@ -23,3 +23,4 @@ require(__DIR__.'../../app/Http/Controllers/Auth/auth.php');
 Route::resource('categories','CategoriesController');
 Route::resource('authors','AuthorsController');
 Route::resource('editors','EditorsController');
+Route::resource('articles','ArticlesController');
