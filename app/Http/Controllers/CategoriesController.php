@@ -40,11 +40,14 @@ class CategoriesController extends Controller
             'categorie' => 'required|string|',
             'icone' => 'required|image|',
         ]);
-        $image = request('icone')->store('uploads', 'public');
-        Categories::create([
-            'categorie' => request('categorie'),
-            'icone' => $image
-        ]);
+        $input = $request->all();
+        if ($image = $request->file('icone')) {
+            $destinationPath = 'image/';
+            $iconeImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $iconeImage);
+            $input['icone'] = "$iconeImage";
+        }
+        Categories::create($input);
         return redirect()->intended('categories')->with('success', 'La catégorie a été ajouté avec succes');
     }
 
@@ -78,15 +81,25 @@ class CategoriesController extends Controller
      * @param  \App\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Categories $categories)
     {
         $request->validate([
             'categorie' => 'required|string|',
             'icone' => '|image|',
         ]);
-        $categories = Categories::find($id);
-        $categories->categorie =  $request->get('categorie');
-        $categories->save();
+        $input = [];
+        $input['categorie'] = $request->input('categorie');
+
+        if ($image = $request->file('icone')) {
+            $destinationPath = 'image/';
+            $iconeImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $iconeImage);
+            $input['icone'] = $iconeImage;
+        } else {
+            unset($input['icone']);
+        }
+
+        $categories->where('id', $request->input('categorieId'))->update($input);
 
         return redirect()->intended('categories')->with('success', 'La modification a été effectué avec succes');
     }
@@ -102,6 +115,6 @@ class CategoriesController extends Controller
     {
         $categories = Categories::find($categories);
         $categories->delete();
-        return redirect('categories')->with('success', 'La suppression a été effectué avec succes');;
+        return redirect('categories')->with('success', 'La suppression a été effectué avec succes');
     }
 }

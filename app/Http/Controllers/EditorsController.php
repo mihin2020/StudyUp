@@ -14,7 +14,8 @@ class EditorsController extends Controller
      */
     public function index()
     {
-        //
+        $editors = Editors::all();
+        return view('editors.editors', compact('editors'));
     }
 
     /**
@@ -35,7 +36,19 @@ class EditorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|',
+            'icone' => 'image',
+        ]);
+        $input = $request->all();
+        if ($image = $request->file('icone')) {
+            $destinationPath = 'image/';
+            $iconeImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $iconeImage);
+            $input['icone'] = "$iconeImage";
+        }
+        Editors::create($input);
+        return redirect()->intended('editors')->with('success', 'La catégorie a été ajouté avec succes');
     }
 
     /**
@@ -55,9 +68,10 @@ class EditorsController extends Controller
      * @param  \App\Editors  $editors
      * @return \Illuminate\Http\Response
      */
-    public function edit(Editors $editors)
+    public function edit($id)
     {
-        //
+        $editeurs = Editors::find($id);
+        return view('editors.edit', compact('editeurs'));
     }
 
     /**
@@ -69,7 +83,26 @@ class EditorsController extends Controller
      */
     public function update(Request $request, Editors $editors)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|',
+            'icone' => '|image|',
+        ]);
+        
+        $input = [];
+        $input['nom'] = $request->input('nom');
+  
+        if ($image = $request->file('icone')) {
+            $destinationPath = 'image/';
+            $iconeImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $iconeImage);
+            $input['icone'] = $iconeImage;
+        }else{
+            unset($input['icone']);
+        }
+          
+        $editors->where('id', $request->input('editorId'))->update($input);
+
+        return redirect()->intended('editors')->with('success', 'La modification a été effectué avec succes');
     }
 
     /**
@@ -78,8 +111,10 @@ class EditorsController extends Controller
      * @param  \App\Editors  $editors
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Editors $editors)
+    public function destroy($id)
     {
-        //
+        $editeurs = Editors::find($id);
+        $editeurs->delete();
+        return redirect('editors')->with('success', 'La suppression a été effectué avec succes');
     }
 }

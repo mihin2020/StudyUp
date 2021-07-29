@@ -25,13 +25,14 @@
                 <strong>{{ $message }}</strong>
             </div>
             @endif
+
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title font-weight-bold text-uppercase">Catégories</h3>
+                    <h3 class="card-title font-weight-bold text-uppercase">Auteurs</h3>
 
                     <div class="card-tools d-flex justify-content-between">
-                        <button type="button" class="btn btn-block btn-outline-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Ajouter une catégorie</button>
+                        <button type="button" class="btn btn-block btn-outline-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Ajouter un auteur</button>
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>
                         </button>
@@ -47,48 +48,35 @@
                                 <th style="width: 20%" class="text-center">
                                     NOM
                                 </th>
-                                <th style="width: 30%" class="text-center">
-                                    ICONE
+                                <th style="width: 20%" class="text-center">
+                                    PRENOM(S)
                                 </th>
                                 <th style="width: 20%" class="text-center">
-                                    ACTION
+                                    ACTIONS
                                 </th>
                             </tr>
                         </thead>
-                        @forelse($categories as $categorie)
+                        @forelse($auteurs as $auteur)
                         <tbody>
                             <tr>
                                 <td>
-                                    {{ $categorie->id }}
+                                    {{ $auteur->id }}
                                 </td>
                                 <td class="text-center">
-                                    <a>
-                                        {{ $categorie->categorie }}
-                                    </a>
+                                    {{ $auteur->nom }}
                                 </td>
                                 <td class="text-center">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="categorie" class="cercle" src="{{asset('image').'/'.$categorie->icone}}">
-                                            <style>
-                                                .cercle {
-                                                    width: 75px;
-                                                    height: 75px;
-                                                    border-radius: 50%;
-                                                }
-                                            </style>
-                                        </li>
-                                    </ul>
+                                    {{ $auteur->prenom }}
                                 </td>
-                                <td class="  d-flex justify-content-around my-4">
-                                    <a href="{{ route('categories.edit',$categorie->id) }}">
+                                <td class=" d-flex justify-content-around my-4 ">
+                                    <a href="{{ route('authors.edit',$auteur->id) }}">
                                         <button class="btn btn-info btn-sm " type="button">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Editer
                                         </button>
                                     </a>
-                                    <form action="{{ route('categories.destroy',$categorie->id) }}" method="post">
+                                    <form action="{{ route('authors.destroy',$auteur->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" onclick="alerte()" type="submit">
@@ -109,7 +97,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                                         </svg>
-                                        Aucune Categorie disponible
+                                        Aucun Auteur disponible
                                     </p>
                                 </div>
                             </tr>
@@ -125,21 +113,23 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title font-weight-bolder" id="exampleModalLabel">Ajout de Catégories</h5>
+                            <h5 class="modal-title font-weight-bolder" id="exampleModalLabel">Ajout d'auteurs</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+                            <form method="post" action="" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Nom:</label>
-                                    <input type="text" class="form-control" name="categorie" id="recipient-name">
-                                    {!! $errors->first('categorie', '<small class="text-danger">:message</small>') !!}
+                                    <input type="text" class="form-control" name="nom" id="recipient-name">
+                                    {!! $errors->first('nom', '<small class="text-danger">:message</small>') !!}
                                 </div>
                                 <div class="form-group">
-                                    <input type="file" name="icone" class="form-control-file" id="exampleFormControlFile1">
+                                    <label for="recipient-name" class="col-form-label">Prénom(s):</label>
+                                    <input type="text" class="form-control" name="prenom" id="recipient-name">
+                                    {!! $errors->first('prenom', '<small class="text-danger">:message</small>') !!}
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Valider</button>
@@ -149,7 +139,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
     </div>
 </div>
