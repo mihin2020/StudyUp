@@ -6,66 +6,48 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $redirectTo = RouteServiceProvider::CONFIRMATION;
     public function __construct()
     {
         $this->middleware('guest');
     }
 
     public function index() {
-        return view("");
+        return view("auth.register");
     }
 
-    protected function validator(array $data)
+    public function store(Request $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        $request->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'same:email-confirm', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'same:password-confirm'],
         ]);
-    }
+        User::create([
+            'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $request->session()->put([
+            'confirmation_data_exist' => true,
+            'title' => "Votre inscription a été un succcès:)",
+            'body' => [
+                0 => "Nous venons de vous envoyer un mail de confirmation.",
+                1 => "Vueillez consulter votre boite mail puis cliquer sur le lien pour verifier votre e-mail."
+            ],
         ]);
+
+        return redirect()->intended($this->redirectTo);
+        
     }
 }
