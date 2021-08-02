@@ -14,7 +14,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        //
+        $auteurs = Authors::all();
+        return view('authors.authors',compact('auteurs'));
     }
 
     /**
@@ -35,7 +36,16 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|',
+            'prenom' => 'required|string|'
+
+        ]);
+        Authors::create([
+            'nom' =>request('nom'),
+            'prenom' =>request('prenom')
+        ]);
+        return redirect()->intended('authors')->with('success',"L'auteur a été ajouté avec succes");
     }
 
     /**
@@ -55,9 +65,10 @@ class AuthorsController extends Controller
      * @param  \App\Authors  $authors
      * @return \Illuminate\Http\Response
      */
-    public function edit(Authors $authors)
+    public function edit($id)
     {
-        //
+        $auteurs = Authors::find($id);
+        return view('authors.edit',compact('auteurs'));
     }
 
     /**
@@ -67,9 +78,18 @@ class AuthorsController extends Controller
      * @param  \App\Authors  $authors
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Authors $authors)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nom' => 'required|string|',
+            'prenom' => 'required|string|',
+        ]);
+        $auteurs = Authors::find($id);
+        $auteurs->nom =  $request->get('nom');
+        $auteurs->prenom =  $request->get('prenom');
+        $auteurs->save();
+
+        return redirect()->intended('authors')->with('success', 'La modification a été effectué avec succes');
     }
 
     /**
@@ -78,8 +98,10 @@ class AuthorsController extends Controller
      * @param  \App\Authors  $authors
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Authors $authors)
+    public function destroy( $auteurs)
     {
-        //
+        $auteurs = Authors::find($auteurs);
+        $auteurs->delete();
+        return redirect('authors')->with('success', 'La suppression a été effectué avec succes');
     }
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |----------------------------------------------------git ----------------------
 | Web Routes
@@ -12,7 +14,14 @@ use App\Http\Controllers\Auth\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes(['verify' => true]);
 Route::get('/admin', 'DashboardController@dashboard')->name('dashboard')->middleware("auth");
 Route::get('/home', 'HomeController@index')->name('home');
 require(__DIR__.'../../app/Http/Controllers/Auth/auth.php');
+
+
+// Routes categories
+Route::resource('categories','CategoriesController');
+Route::resource('authors','AuthorsController');
+Route::resource('editors','EditorsController');
+Route::resource('articles','ArticlesController');
