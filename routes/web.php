@@ -14,7 +14,7 @@ use App\Http\Controllers\CategoriesController;
 |
 */
 
-Route::get('/admin', 'DashboardController@dashboard')->name('dashboard');//->middleware("auth");
+Route::get('/admin', 'DashboardController@dashboard')->name('dashboard')->middleware("auth");
 Route::get('/home', 'HomeController@index')->name('home');
 require(__DIR__.'../../app/Http/Controllers/Auth/auth.php');
 
