@@ -9,4 +9,7 @@ class DashboardController extends Controller
     public function dashboard(){
         return view('layouts.Admin');
     }
+    public function master(){
+        return view('layouts.master');
+    }
 }

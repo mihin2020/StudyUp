@@ -14,7 +14,8 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Articles::all();
+        return view('articles.articles',compact('articles'));
     }
 
     /**
@@ -33,10 +34,24 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        //
+        $request->validate([
+            'titre' => 'required|string|',
+            'contenu' => 'required|string|',
+            'photo' => '|image|',
+        ]);
+        $input = $request->all();
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'image/';
+            $picture = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $picture);
+            $input['photo'] = "$picture";
+        }
+        Articles::create($input);
+        return redirect()->intended('articles')->with('success', "L'article a été ajouté avec succes");
     }
+    
 
     /**
      * Display the specified resource.
@@ -55,9 +70,10 @@ class ArticlesController extends Controller
      * @param  \App\Articles  $articles
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articles $articles)
+    public function edit($id)
     {
-        //
+        $articles = Articles::find($id);
+        return view('articles.edit',compact('articles'));
     }
 
     /**
@@ -69,7 +85,28 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, Articles $articles)
     {
-        //
+        $request->validate([
+            'titre' => 'required|string|',
+            'contenu' => 'required|string|',
+            'photo' => '|image|',
+        ]);
+        
+        $input = [];
+        $input['titre'] = $request->input('titre');
+        $input['contenu'] = $request->input('contenu');
+  
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'image/';
+            $picture = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $picture);
+            $input['photo'] = $picture;
+        }else{
+            unset($input['photo']);
+        }
+          
+        $articles->where('id', $request->input('articleId'))->update($input);
+
+        return redirect()->intended('articles')->with('success', 'La modification a été effectué avec succes');
     }
 
     /**
@@ -78,8 +115,10 @@ class ArticlesController extends Controller
      * @param  \App\Articles  $articles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articles $articles)
+    public function destroy($id)
     {
-        //
+        $articles = Articles::find($id);
+        $articles->delete();
+        return redirect('articles')->with('success', 'La suppression a été effectué avec succes');
     }
 }
