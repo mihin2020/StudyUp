@@ -1,32 +1,33 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+const inputs = Array.from(document.querySelectorAll('input'))
+inputs.forEach(input => {
+    attachEvents(input)
+})
 
-require('./bootstrap');
+const showHideBtn = document.querySelector('a[href="/eye"]');
 
-window.Vue = require('vue');
+showHideBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    const pswInput = document.querySelector('input[name="password"]')
+    const classListArr = Array.from(e.target.classList);
+    if(classListArr.includes("fa-eye-slash")) {
+        classListArr.splice(1, 1, "fa-eye");
+        pswInput.type = "text"
+        e.target.classList = classListArr.join(" ");
+    }
+    else {
+        classListArr.splice(1, 1, "fa-eye-slash");
+        pswInput.type = "password"
+        e.target.classList = classListArr.join(" ");
+    }
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+    
+})
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+function attachEvents(el) {
+    el.addEventListener('focus', (e) => {
+        e.target.parentElement.classList.remove('is-invalid')
+        e.target.parentElement.classList.add('focused')
+    })
+    el.addEventListener('blur', (e) => e.target.parentElement.classList.remove('focused'))
+}
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
-});

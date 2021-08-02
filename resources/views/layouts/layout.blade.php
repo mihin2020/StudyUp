@@ -13,9 +13,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @include('layouts.header')
     <main>
         <div class="container">
-            <div class="row m-auto flex justify-content-around align-items-center">
+            <div class="row m-auto d-block">
                 @yield('content')
             </div>
         </div>
