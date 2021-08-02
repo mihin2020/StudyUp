@@ -160,3 +160,7 @@ a[href="/eye"]:hover{color: var(--smt-fourth);}
     border: rgb(253, 88, 88);
     box-shadow: 0 0 2px 2px rgb(253, 88, 88);
 }
+
+@media screen and (max-width: 1159px) {
+    .smt-sm-h4 {font-size: 19px;}
+}
