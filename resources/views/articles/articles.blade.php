@@ -39,7 +39,8 @@
                                 {!! $errors->first('titre', '<small class="text-danger">:message</small>') !!}
                             </div>
                             <div class="form-group">
-                                <label>Fond</label>
+
+                                <label>Fond:</label>
 
                                 <div class="input-group my-colorpicker2">
                                     <input type="color" name="color" class="form-control">
@@ -48,7 +49,6 @@
                                         <span class="input-group-text"><i class="fas fa-square"></i></span>
                                     </div>
                                 </div>
-                                <!-- /.input group -->
                             </div>
                             <div class="form-group">
                                 <label>Contenu de l'article</label>
@@ -62,7 +62,7 @@
                                     Image</button>
                                 <div class="image-upload-wrap">
                                     <input class="file-upload-input" type='file' name="photo" onchange="readURL(this);" accept="image/*" />
-                                   
+
                                     <div class="drag-text">
                                         <h3>Ajouter une Photo</h3>
                                     </div>
@@ -143,7 +143,10 @@
                                     </li>
                                 </ul>
                             </td>
-                            <td class="text-center ">
+
+
+                            <td class="text-center">
+
 
                                 {{ $article->contenu }}
 
@@ -156,6 +159,8 @@
                             <td class="  d-flex justify-content-around my-4">
                                 <a href="{{ route('articles.edit',$article->id) }}">
                                     <button class="btn btn-info btn-sm " type="button">
+
+
                                         Editer
                                     </button>
                                 </a>
@@ -163,6 +168,8 @@
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm mx-4" onclick="alerte()" type="submit">
+
+
                                         Supprimer
                                     </button>
                                     <!-- <script>
