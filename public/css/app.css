@@ -160,3 +160,32 @@ a[href="/eye"]:hover{color: var(--smt-fourth);}
     border: rgb(253, 88, 88);
     box-shadow: 0 0 2px 2px rgb(253, 88, 88);
 }
+
+.header-nav li .nav-link {color: #fff;}
+
+.header-nav li .nav-link:hover {color: var(--smt-secondary);}
+
+.header-nav li:last-of-type .nav-link {
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    padding: 9px 16px;
+    background: var(--smt-secondary);
+    color: #fff;
+    outline: none;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.header-nav li:last-of-type .nav-link:hover {
+    transition: filter .2s, color .2s;
+    color: #ddd;
+    filter: brightness(.90);
+    text-decoration: none;
+}
+
+.active {color: var(--smt-secondary) !important;}
+
+@media screen and (max-width: 1159px) {
+    .smt-sm-h4 {font-size: 19px;}
+}
