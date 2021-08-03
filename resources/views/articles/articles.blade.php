@@ -39,12 +39,26 @@
                                 {!! $errors->first('titre', '<small class="text-danger">:message</small>') !!}
                             </div>
                             <div class="form-group">
+                                <label>Fond:</label>
+                                <div class="input-group my-colorpicker2">
+                                    <input type="color" name="color" class="form-control">
+                                    {!! $errors->first('color', '<small class="text-danger">:message</small>') !!}
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label>Contenu de l'article</label>
                                 <textarea type='text' name="contenu" id="summernote"></textarea>
                                 {!! $errors->first('contenu', '<small class="text-danger">:message</small>') !!}
                             </div>
+                            <div class="form-check form-switch col-12">
+                                <input class="form-check-input" type="checkbox" name="last_article">
+                                <label class="form-check-label font-weight-bolder" >selectionner comme derniers articles</label>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-xs-12">
+                        <div class="col-lg-3 col-md-3 col-xs-12 my-5">
                             <div class="file-upload">
                                 <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
                                     Image</button>
