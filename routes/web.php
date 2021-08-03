@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ContactsController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,13 +16,21 @@ use App\Http\Controllers\CategoriesController;
 |
 */
 
+Auth::routes(['verify' => true]);
 Route::get('/admin', 'DashboardController@dashboard')->name('dashboard')->middleware("auth");
 Route::get('/home', 'HomeController@index')->name('home');
 require(__DIR__.'../../app/Http/Controllers/Auth/auth.php');
 
 
-// Routes categories
+// CRUDs admin
 Route::resource('categories','CategoriesController');
 Route::resource('authors','AuthorsController');
 Route::resource('editors','EditorsController');
 Route::resource('articles','ArticlesController');
+
+//Routes home
+
+Route::get('/contacts', [ContactsController::class, 'index']);
+
+//Routes articles/blog
+Route::resource('blog','BlogController');
