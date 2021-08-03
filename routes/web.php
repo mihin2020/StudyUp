@@ -30,3 +30,6 @@ Route::resource('articles','ArticlesController');
 //Routes home
 
 Route::get('/contacts', [ContactsController::class, 'index']);
+
+//Routes articles/blog
+Route::resource('blog','BlogController');
