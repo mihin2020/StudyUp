@@ -198,3 +198,8 @@ a[href="/eye"]:hover{color: var(--smt-fourth);}
 @media screen and (max-width: 1159px) {
     .smt-sm-h4 {font-size: 19px;}
 }
+/* css blog */
+
+.letter_size{
+    font-size: 28px;
+}

@@ -41,6 +41,7 @@ class ArticlesController extends Controller
             'color' => 'required|string|',
             'contenu' => 'required|string|',
             'photo' => '|image|',
+            'last_article' => 'string',
         ]);
         $input = $request->all();
         if ($image = $request->file('photo')) {
@@ -90,7 +91,7 @@ class ArticlesController extends Controller
             'titre' => 'required|string|',
             'color' => 'required|string|',
             'contenu' => 'required|string|',
-            'photo' => '|image|',
+            'photo' => 'image',
         ]);
         
         $input = [];
