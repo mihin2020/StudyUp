@@ -28,7 +28,10 @@ Route::resource('editors','EditorsController');
 Route::resource('articles','ArticlesController');
 
 //Routes home
-
+Route::get('/', function() {
+    return view('home.welcome');
+});
+Route::get('/contacts', [ContactsController::class, 'index']);
 Route::get('/contacts', [ContactsController::class, 'index']);
 
 //Routes articles/blog
