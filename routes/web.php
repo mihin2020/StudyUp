@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LanguagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,10 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/admin', 'DashboardController@dashboard')->name('dashboard')->middleware("auth");
+Route::get('/admin', 'DashboardController@dashboard')->name('admin')/*->middleware("auth")*/;
+Route::get('/master', 'DashboardController@master')->name('master');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('language','LanguagesController'); 
+Route::resource('countrie','CountriesController'); 
+Route::resource('Faqs','FaqsController');
 require(__DIR__.'../../app/Http/Controllers/Auth/auth.php');
