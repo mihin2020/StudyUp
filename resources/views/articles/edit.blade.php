@@ -11,6 +11,7 @@
         </div>
     </div>
     <div class="container">
+
         <div class="card ">
             <div class="card-header">
                 <h3 class="card-title">Modifier l'article</h3>
@@ -42,12 +43,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Fond:</label>
+
                                 <div class="input-group my-colorpicker2">
                                     {!! $errors->first('color', '<small class="text-danger">:message</small>') !!}
                                     <input type="color" name="color" value="{{ $articles->color }}" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fas fa-square"></i></span>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="form-group">

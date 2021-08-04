@@ -1,3 +1,5 @@
+import TitleBand from "./TitleBand";
+
 const inputs = Array.from(document.querySelectorAll('input'))
 inputs.forEach(input => {
     attachEvents(input)

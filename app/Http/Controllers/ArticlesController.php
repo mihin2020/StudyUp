@@ -91,7 +91,9 @@ class ArticlesController extends Controller
             'titre' => 'required|string|',
             'color' => 'required|string|',
             'contenu' => 'required|string|',
-            'photo' => 'image',
+            'photo' => 'required|image|',
+
+           
         ]);
         
         $input = [];
