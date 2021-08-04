@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Contenu de l'article</label>
-                                <textarea type='text' name="contenu" id="summernote">
+                                <textarea type='text' name="contenu" id="summernote"></textarea>
                                
                                 {!! $errors->first('contenu', '<small class="text-danger">:message</small>') !!}
                             </div>

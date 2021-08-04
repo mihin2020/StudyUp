@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['verify' => true]);
 Route::get('/admin', 'DashboardController@dashboard')->name('dashboard')->middleware("auth");
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/deconnexion','HomeController@deconnexion');
 require(__DIR__.'../../app/Http/Controllers/Auth/auth.php');
 
 

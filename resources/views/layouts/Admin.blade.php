@@ -7,8 +7,7 @@
     <title>StudyUp | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -40,7 +39,14 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-
+                <li class="mx-3">
+                    <div>
+                        <img src="{{asset('dist/img/avatar.jpg')}}" width="40px" height="40px" alt="">
+                    </div>
+                </li>
+                <li class="mx-3 mt-1">
+                    <a href="/deconnexion"><button type="button" class="btn btn-secondary btn-sm ">Deconnexion</button></a>
+                </li>
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -95,8 +101,7 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
@@ -210,8 +215,7 @@
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -226,8 +230,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -242,8 +245,7 @@
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -258,8 +260,7 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
-                                        class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -293,7 +294,7 @@
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

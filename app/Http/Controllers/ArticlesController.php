@@ -98,6 +98,7 @@ class ArticlesController extends Controller
         $input['titre'] = $request->input('titre');
         $input['color'] = $request->input('color');
         $input['contenu'] = $request->input('contenu');
+        $input['last_article'] = $request->input('last_article');
   
         if ($image = $request->file('photo')) {
             $destinationPath = 'image/';

@@ -31,8 +31,16 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
+
             </ul>
+
             <ul class="navbar-nav ml-auto">
+                <li class="mx-3">
+                    <img src="{{asset('dist/img/avatar.jpg')}}" class="dropbtn" width="40px" height="40px" alt="">
+                </li>
+                <li class="mx-3 mt-1">
+                    <a href="/deconnexion"><button type="button" class="btn btn-secondary btn-sm ">Deconnexion</button></a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
@@ -70,6 +78,7 @@
                     </a>
                 </li>
             </ul>
+
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
